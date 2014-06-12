@@ -1,6 +1,11 @@
-
 public abstract class Simulation 
 {
-	public abstract boolean isDone();
-	public abstract void serve();
+    public MemoryManager procMan;
+	
+	public Simulation(MemoryManager processManager)
+	{
+		procMan = processManager;
+	}
+        
+	public abstract void serve(Page page);
 }
