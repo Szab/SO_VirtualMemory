@@ -12,11 +12,24 @@ public class MemoryManager
 {
     public int workTime = 0; // Liczba zrealizowanych kwantów czasu
     
-    public ArrayList<Process> processList; // Lista procesów do zrealizowania
+    public ArrayList<Process> processList;  // Lista procesów do zrealizowania
+    public ArrayList<Page> ciagOdwolan;     // Globalny ciąg odwołań
+    public ArrayList<Page> callHistory;     // Historia wywolan
     
     public Memory memory;   // Pamięć
     
     private IOController controller; // Kontroler wejścia/wyjścia
+    
+    // Stworz ciag odwolan
+    public void createCallList()
+    {
+        for(Process proc : processList)
+        {
+            for(int i = 0 ; i<proc.callList.length ; i++)
+                ciagOdwolan.add(proc.callList[i]);
+        }
+        java.util.Collections.shuffle(ciagOdwolan);
+    }
     
     // Zwraca sumę ciągu odwołań
     public int sumRemainingCalls()
@@ -51,6 +64,10 @@ public class MemoryManager
         return (double)sumErrors()/(double)sumCalls();
     }
     
+    public void call()
+    {
+        
+    }
     
     // Generuje losowe ciągi odwołań
     private void processGenerator(int maxProc, int maxPage)
@@ -75,9 +92,28 @@ public class MemoryManager
            {
                newProcess.callList[k] = newProcess.callList[rand.nextInt(k)];
            }
+           
+           createCallList();
         }
     }
         
+    public void nextStep() //kolejny krok (jednostka czasu)
+    {        
+        if(!ciagOdwolan.isEmpty()) ciagOdwolan.get(0).call();
+        callHistory.add(ciagOdwolan.remove(0));
+        workTime++;
+        controller.update(); 
+    }
+    
+    public void endSimulation() //przeskoczenie do końca symulacji
+    {       
+        while(!ciagOdwolan.isEmpty())
+        {
+        	nextStep();
+        }
+        controller.update(); 
+    }
+    
     // Inicjalizuje PM
     public void initialize(Simulation sim)
     {

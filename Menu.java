@@ -32,6 +32,7 @@ public class Menu extends javax.swing.JFrame
     {
 
         grpAlgorytmy = new javax.swing.ButtonGroup();
+        grpPrzydzielanie = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         btnFCFS = new javax.swing.JRadioButton();
         btnSJF = new javax.swing.JRadioButton();
@@ -43,6 +44,10 @@ public class Menu extends javax.swing.JFrame
         jtxtMaxProc = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jtxtMaxPage = new javax.swing.JTextField();
+        btnProp = new javax.swing.JRadioButton();
+        btnRowny = new javax.swing.JRadioButton();
+        btnCzestosc = new javax.swing.JRadioButton();
+        btnStrefowy = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,6 +86,25 @@ public class Menu extends javax.swing.JFrame
 
         jtxtMaxPage.setText("50");
 
+        grpPrzydzielanie.add(btnProp);
+        btnProp.setText("Przydział proporcjonalny");
+
+        grpPrzydzielanie.add(btnRowny);
+        btnRowny.setText("Przydział równy");
+        btnRowny.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnRownyActionPerformed(evt);
+            }
+        });
+
+        grpPrzydzielanie.add(btnCzestosc);
+        btnCzestosc.setText("Sterowanie częstością błędów");
+
+        grpPrzydzielanie.add(btnStrefowy);
+        btnStrefowy.setText("Przydział strefowy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,33 +113,39 @@ public class Menu extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addComponent(jLabel1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnFCFS)
-                                    .addComponent(btnSJF))
-                                .addGap(183, 183, 183)
+                                    .addComponent(btnSJF)
+                                    .addComponent(btnSJFw)
+                                    .addComponent(btnROT)
+                                    .addComponent(btnRAND)))
+                            .addComponent(jButton1))
+                        .addGap(105, 105, 105)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnStrefowy)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(4, 4, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtxtMaxProc, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                                     .addComponent(jtxtMaxPage))
                                 .addGap(47, 47, 47))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSJFw)
-                                    .addComponent(btnROT)
-                                    .addComponent(btnRAND))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(btnProp)
+                                    .addComponent(btnRowny)
+                                    .addComponent(btnCzestosc))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,13 +165,24 @@ public class Menu extends javax.swing.JFrame
                     .addComponent(jLabel2)
                     .addComponent(jtxtMaxPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSJFw)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSJFw)
+                    .addComponent(btnProp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnROT)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnROT)
+                    .addComponent(btnRowny))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRAND)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRAND)
+                    .addComponent(btnCzestosc))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(btnStrefowy)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -164,6 +205,11 @@ public class Menu extends javax.swing.JFrame
         
         if(sim!=null) ProcMan.initialize(sim);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnRownyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRownyActionPerformed
+    {//GEN-HEADEREND:event_btnRownyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRownyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,12 +257,17 @@ public class Menu extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton btnCzestosc;
     private javax.swing.JRadioButton btnFCFS;
+    private javax.swing.JRadioButton btnProp;
     private javax.swing.JRadioButton btnRAND;
     private javax.swing.JRadioButton btnROT;
+    private javax.swing.JRadioButton btnRowny;
     private javax.swing.JRadioButton btnSJF;
     private javax.swing.JRadioButton btnSJFw;
+    private javax.swing.JRadioButton btnStrefowy;
     private javax.swing.ButtonGroup grpAlgorytmy;
+    private javax.swing.ButtonGroup grpPrzydzielanie;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

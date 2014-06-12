@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="grpAlgorytmy">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="grpPrzydzielanie">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -30,20 +32,36 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnFCFS" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnSJF" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnSJFw" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnROT" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnRAND" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnStrefowy" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="32" max="32767" attributes="0"/>
+                              <EmptySpace min="32" pref="4" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jtxtMaxProc" pref="48" max="32767" attributes="0"/>
                                   <Component id="jtxtMaxPage" max="32767" attributes="0"/>
@@ -52,21 +70,13 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnSJFw" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnROT" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnRAND" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnProp" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnRowny" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCzestosc" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -94,13 +104,30 @@
                   <Component id="jtxtMaxPage" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnSJFw" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSJFw" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnProp" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnROT" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnROT" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRowny" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnRAND" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnRAND" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCzestosc" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="btnStrefowy" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -181,6 +208,41 @@
     <Component class="javax.swing.JTextField" name="jtxtMaxPage">
       <Properties>
         <Property name="text" type="java.lang.String" value="50"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="btnProp">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="grpPrzydzielanie"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Przydzia&#x142; proporcjonalny"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="btnRowny">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="grpPrzydzielanie"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Przydzia&#x142; r&#xf3;wny"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRownyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="btnCzestosc">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="grpPrzydzielanie"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Sterowanie cz&#x119;sto&#x15b;ci&#x105; b&#x142;&#x119;d&#xf3;w"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="btnStrefowy">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="grpPrzydzielanie"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Przydzia&#x142; strefowy"/>
       </Properties>
     </Component>
   </SubComponents>
