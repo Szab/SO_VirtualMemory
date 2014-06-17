@@ -1,3 +1,9 @@
+package Algorytmy1;
+
+import Glowne.Memory;
+import Glowne.Page;
+import Glowne.MemoryManager;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,10 +14,9 @@
  *
  * @author Szab
  */
-public class FIFOsimulation extends Simulation
+public class AprLRUsimulation extends Simulation
 {
     public Process current = null;	
-    public MemoryManager procMan;
     
     public Memory mem = procMan.memory;
     
@@ -22,14 +27,14 @@ public class FIFOsimulation extends Simulation
         {
             if(index != -1)
             {
-                if(mem.segments[index].added < mem.segments[i].added) index = i;
+                if(mem.segments[index].lastUsed > mem.segments[i].lastUsed) index = i;
             }
             else index = i;
         }
         return index;
     }
     
-    public FIFOsimulation(MemoryManager processManager)
+    public AprLRUsimulation(MemoryManager processManager)
     {
         super(processManager);
     }
