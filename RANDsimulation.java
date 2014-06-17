@@ -1,9 +1,3 @@
-package Algorytmy1;
-
-import Glowne.Memory;
-import Glowne.Page;
-import Glowne.MemoryManager;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,36 +8,34 @@ import Glowne.MemoryManager;
  *
  * @author Szab
  */
-public class OPTsimulation extends Simulation
+public class RANDsimulation extends Simulation
 {
     public Process current = null;	
+    public MemoryManager procMan;
     
     public Memory mem = procMan.memory;
     
-    public int find()
+    public int findPage()
     {
-        for(int i = 0 ; i<mem.segments.length ; i++)
-            if(!procMan.ciagOdwolan.contains(mem.segments[i]))
-                return i;
-        
-        Page page = procMan.ciagOdwolan.get(procMan.ciagOdwolan.size()-1);
         for(int i = 0 ; i<mem.segments.length ; i++)
         {
-            if(mem.segments[i] == page) return i;
+            if(mem.segments[i].recentlyUsed = true) mem.segments[i].recentlyUsed = false;
+            else return i;
         }
-        return -1;
+        return mem.segments.length-1;
     }
     
-    public OPTsimulation(MemoryManager procMan)
+    public RANDsimulation(MemoryManager processManager)
     {
-        super(procMan);
+        super(processManager);
     }
     
     public void serve(Page page)
     {
-        int i = find();
+        int i = findPage();
         mem.segments[i].presenceBit = false;
         mem.segments[i].segmentNumber = -1;
+        mem.segments[i].added = System.nanoTime();
         mem.segments[i] = page;
     }
 }
