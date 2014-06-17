@@ -10,10 +10,6 @@ import Glowne.MemoryManager;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Szab
- */
 public class AprLRUsimulation extends Simulation
 {
     public Process current = null;	

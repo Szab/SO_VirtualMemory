@@ -10,17 +10,13 @@ import Glowne.Page;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Szab
- */
 public class FIFOsimulation extends Simulation
 {
     public Process current = null;	
     
     public Memory mem = procMan.memory;
     
-    public int findLongestIndex()
+    public int findLongestIndexGlobal()
     {
         int index = -1;
         for(int i = 0 ; i<mem.segments.length ; i++)
@@ -34,6 +30,21 @@ public class FIFOsimulation extends Simulation
         return index;
     }
     
+    public int findLongestIndexLocal(Page page)
+    {
+        int index = -1;
+        for(Integer i : page.owner.pula)
+        {
+            if(index != -1)
+            {
+                if(mem.segments[index].added < mem.segments[i].added) index = i;
+            }
+            else index = i;
+        }
+        return index;
+    }
+    
+    
     public FIFOsimulation(MemoryManager processManager)
     {
         super(processManager);
@@ -41,7 +52,7 @@ public class FIFOsimulation extends Simulation
     
     public void serve(Page page)
     {
-        int i = findLongestIndex();
+        int i = (page.owner.pula.isEmpty() ? findLongestIndexGlobal() : findLongestIndexLocal(page));
         mem.segments[i].presenceBit = false;
         mem.segments[i].segmentNumber = -1;
         mem.segments[i].added = System.nanoTime();

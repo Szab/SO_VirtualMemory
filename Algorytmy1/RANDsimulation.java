@@ -10,21 +10,11 @@ import Glowne.Page;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Szab
- */
 public class RANDsimulation extends Simulation
 {
     public Process current = null;	
     
     public Memory mem = procMan.memory;
-    
-    public int findPage()
-    {
-        java.util.Random rand = new java.util.Random();
-        return rand.nextInt(mem.segments.length);
-    }
     
     public RANDsimulation(MemoryManager processManager)
     {
@@ -33,7 +23,16 @@ public class RANDsimulation extends Simulation
     
     public void serve(Page page)
     {
-        int i = findPage();
+        int i;
+        java.util.Random rand = new java.util.Random();
+        if(page.owner.pula.isEmpty())
+        {
+            i = rand.nextInt(mem.segments.length);           
+        }
+        else
+        {
+            i = page.owner.pula.get(rand.nextInt(page.owner.pula.size()));
+        }
         mem.segments[i].presenceBit = false;
         mem.segments[i].segmentNumber = -1;
         mem.segments[i].added = System.nanoTime();
