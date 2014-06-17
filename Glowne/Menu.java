@@ -55,8 +55,9 @@ public class Menu extends javax.swing.JFrame
         jtxtMaxPage = new javax.swing.JTextField();
         btnProp = new javax.swing.JRadioButton();
         btnRowny = new javax.swing.JRadioButton();
-        btnCzestosc = new javax.swing.JRadioButton();
         btnStrefowy = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtRamek = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,11 +109,12 @@ public class Menu extends javax.swing.JFrame
             }
         });
 
-        grpPrzydzielanie.add(btnCzestosc);
-        btnCzestosc.setText("Sterowanie częstością błędów");
-
         grpPrzydzielanie.add(btnStrefowy);
         btnStrefowy.setText("Przydział strefowy");
+
+        jLabel3.setText("Ilość ramek:");
+
+        txtRamek.setText("100");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,23 +140,25 @@ public class Menu extends javax.swing.JFrame
                         .addGap(105, 105, 105)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnStrefowy)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnStrefowy)
+                                    .addComponent(btnRowny))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnProp)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addGap(4, 4, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxtMaxProc, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                                    .addComponent(jtxtMaxPage))
-                                .addGap(47, 47, 47))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnProp)
-                                    .addComponent(btnRowny)
-                                    .addComponent(btnCzestosc))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtRamek, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jtxtMaxProc, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                        .addComponent(jtxtMaxPage)))
+                                .addGap(47, 47, 47))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,26 +177,24 @@ public class Menu extends javax.swing.JFrame
                     .addComponent(btnSJF)
                     .addComponent(jLabel2)
                     .addComponent(jtxtMaxPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSJFw)
-                    .addComponent(btnProp))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnROT)
-                    .addComponent(btnRowny))
+                    .addComponent(txtRamek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnProp)
+                    .addComponent(btnROT))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRAND)
-                    .addComponent(btnCzestosc))
+                    .addComponent(btnRowny))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(btnStrefowy)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(btnStrefowy)
+                    .addComponent(jButton1))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -204,7 +206,7 @@ public class Menu extends javax.swing.JFrame
         
         this.setVisible(false);
         
-        MemoryManager ProcMan = new MemoryManager(Integer.parseInt(jtxtMaxProc.getText()), Integer.parseInt(jtxtMaxPage.getText()));
+        MemoryManager ProcMan = new MemoryManager(Integer.parseInt(jtxtMaxProc.getText()), Integer.parseInt(jtxtMaxPage.getText()), Integer.parseInt(txtRamek.getText()));
         Simulation sim = null;
         Simulation sim2 = null;
         
@@ -272,7 +274,6 @@ public class Menu extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton btnCzestosc;
     private javax.swing.JRadioButton btnFCFS;
     private javax.swing.JRadioButton btnProp;
     private javax.swing.JRadioButton btnRAND;
@@ -286,8 +287,10 @@ public class Menu extends javax.swing.JFrame
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jtxtMaxPage;
     private javax.swing.JTextField jtxtMaxProc;
+    private javax.swing.JTextField txtRamek;
     // End of variables declaration//GEN-END:variables
 }

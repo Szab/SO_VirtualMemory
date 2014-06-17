@@ -20,9 +20,9 @@ public class Memory
         memMan.alg.serve(page);
     }
 
-    public Memory(MemoryManager memMan)
+    public Memory(MemoryManager memMan, int ramek)
     {
         this.memMan = memMan;
-        segments = new Page[10];
+        segments = new Page[ramek];
     }
 }

@@ -42,10 +42,16 @@ public class MemoryManager
     // Zwraca sumę ciągu odwołań
     public int sumRemainingCalls()
     {
-        int rc = 0;
+        return ciagOdwolan.size();
+    }
+    
+    // Suma stron
+    public int sumPages()
+    {
+        int i = 0;
         for(Process proc : processList)
-            rc += proc.getRemaining();
-        return rc;
+            i += proc.callList.length;
+        return i;
     }
     
     // Zwraca sumę błędów
@@ -73,6 +79,23 @@ public class MemoryManager
     public Double getErrorsPerCalls()
     {
         return (double)sumErrors()/(double)sumCalls();
+    }
+    
+    // Błędów na stronę
+    public Double getErrorsPerPage()
+    {
+        int pages = 0;
+        int errors = 0;
+        for(Process proc : processList)
+        {
+            pages += proc.callList.length;
+            for(int i = 0 ; i<proc.callList.length ; i++)
+            {
+                errors += proc.callList[i].errors;
+            }
+        }
+        return (double)errors/(double)pages;
+        
     }
     
     
@@ -134,9 +157,9 @@ public class MemoryManager
         controller.initialize();
     }
     
-    public MemoryManager(int maxProc, int maxPage)
+    public MemoryManager(int maxProc, int maxPage, int ramek)
     {        
-        memory = new Memory(this);
+        memory = new Memory(this, ramek);
         processGenerator(maxProc, maxPage);
     }
     

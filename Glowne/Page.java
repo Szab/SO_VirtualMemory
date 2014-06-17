@@ -21,17 +21,18 @@ public class Page
         if(presenceBit == false)
         {
             errors++;
+            
             int space = -1;
-            if(!owner.pula.isEmpty())
+            if(owner.pula.isEmpty())
+            {
+                space = memory.findFreeSegment();
+            }
+            else
             {
                 for(Integer i : owner.pula)
                 {
                     if(memory.segments[i] == null) space = i;
                 }
-            }
-            else
-            {
-                memory.findFreeSegment();
             }
             
             if(space<0)

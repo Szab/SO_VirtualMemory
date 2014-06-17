@@ -83,7 +83,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="B&#x142;&#x119;d&#xf3;w na odwo&#x142;anie:"/>
+            <Property name="text" type="java.lang.String" value="B&#x142;&#x119;d&#xf3;w na stron&#x119;:"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -121,7 +121,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblWorkTime">
+        <Component class="javax.swing.JLabel" name="lblIloscPrzebiegow">
           <Properties>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
@@ -141,7 +141,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblNumberRealised">
+        <Component class="javax.swing.JLabel" name="lblRealised">
           <Properties>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
@@ -151,7 +151,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblAverageWaited">
+        <Component class="javax.swing.JLabel" name="lblErrors">
           <Properties>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
@@ -161,7 +161,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblProcessDuration">
+        <Component class="javax.swing.JLabel" name="lblErrPerPage">
           <Properties>
             <Property name="text" type="java.lang.String" value="0,0"/>
           </Properties>
@@ -171,7 +171,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblRemainingTime">
+        <Component class="javax.swing.JLabel" name="lblPages">
           <Properties>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
@@ -181,7 +181,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblROTQuant">
+        <Component class="javax.swing.JLabel" name="lblRamki">
           <Properties>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>

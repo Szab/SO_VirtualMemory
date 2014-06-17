@@ -59,13 +59,13 @@ public class SimulationGUI extends javax.swing.JFrame
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        lblWorkTime = new javax.swing.JLabel();
+        lblIloscPrzebiegow = new javax.swing.JLabel();
         lblRemaining = new javax.swing.JLabel();
-        lblNumberRealised = new javax.swing.JLabel();
-        lblAverageWaited = new javax.swing.JLabel();
-        lblProcessDuration = new javax.swing.JLabel();
-        lblRemainingTime = new javax.swing.JLabel();
-        lblROTQuant = new javax.swing.JLabel();
+        lblRealised = new javax.swing.JLabel();
+        lblErrors = new javax.swing.JLabel();
+        lblErrPerPage = new javax.swing.JLabel();
+        lblPages = new javax.swing.JLabel();
+        lblRamki = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnNextQ = new javax.swing.JButton();
         btnFastFW = new javax.swing.JButton();
@@ -93,7 +93,7 @@ public class SimulationGUI extends javax.swing.JFrame
         jLabel4.setText("Ilość błędów:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 86, -1, -1));
 
-        jLabel6.setText("Błędów na odwołanie:");
+        jLabel6.setText("Błędów na stronę:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 138, -1, -1));
 
         jLabel7.setText("Ilość stron:");
@@ -105,26 +105,26 @@ public class SimulationGUI extends javax.swing.JFrame
         jLabel11.setText("Ilość ramek:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 178, -1, -1));
 
-        lblWorkTime.setText("0");
-        jPanel1.add(lblWorkTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 27, -1, -1));
+        lblIloscPrzebiegow.setText("0");
+        jPanel1.add(lblIloscPrzebiegow, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 27, -1, -1));
 
         lblRemaining.setText("0");
         jPanel1.add(lblRemaining, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 46, -1, -1));
 
-        lblNumberRealised.setText("0");
-        jPanel1.add(lblNumberRealised, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 66, -1, -1));
+        lblRealised.setText("0");
+        jPanel1.add(lblRealised, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 66, -1, -1));
 
-        lblAverageWaited.setText("0");
-        jPanel1.add(lblAverageWaited, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 86, -1, -1));
+        lblErrors.setText("0");
+        jPanel1.add(lblErrors, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 86, -1, -1));
 
-        lblProcessDuration.setText("0,0");
-        jPanel1.add(lblProcessDuration, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 138, -1, -1));
+        lblErrPerPage.setText("0,0");
+        jPanel1.add(lblErrPerPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 138, -1, -1));
 
-        lblRemainingTime.setText("0");
-        jPanel1.add(lblRemainingTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 158, -1, -1));
+        lblPages.setText("0");
+        jPanel1.add(lblPages, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 158, -1, -1));
 
-        lblROTQuant.setText("0");
-        jPanel1.add(lblROTQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 178, -1, -1));
+        lblRamki.setText("0");
+        jPanel1.add(lblRamki, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 178, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 360, 220));
 
@@ -209,6 +209,8 @@ public class SimulationGUI extends javax.swing.JFrame
 
     private void lstProcesyValueChanged(javax.swing.event.ListSelectionEvent evt)//GEN-FIRST:event_lstProcesyValueChanged
     {//GEN-HEADEREND:event_lstProcesyValueChanged
+        if(lstProcesy.getSelectedIndex() != -1)
+        {
         Process proc = ProcMan.processList.get(lstProcesy.getSelectedIndex());
         DefaultListModel tmplmodel = new DefaultListModel();
         for(int i = 0 ; i<proc.callList.length ; i++)
@@ -217,6 +219,7 @@ public class SimulationGUI extends javax.swing.JFrame
                 tmplmodel.addElement("Właściciel strony: "+page.owner.id+", czy w pamięci: "+page.presenceBit+", adres segmentu: "+page.segmentNumber);
         }
         lstPages.setModel(tmplmodel);
+        }
     }//GEN-LAST:event_lstProcesyValueChanged
 
     // Ustawia wartosc wygenerowanych procesów
@@ -233,6 +236,14 @@ public class SimulationGUI extends javax.swing.JFrame
     // Aktualizuje wartości statystyk
     public void update()
     {
+        lblErrors.setText(ProcMan.sumErrors()+"");
+        lblIloscPrzebiegow.setText(""+ProcMan.workTime);
+        lblErrPerPage.setText(""+ProcMan.getErrorsPerPage());
+        lblPages.setText(""+ProcMan.sumPages());
+        lblRamki.setText(""+ProcMan.memory.segments.length);
+        lblRealised.setText(""+ProcMan.callHistory.size());
+        lblRemaining.setText(""+ProcMan.ciagOdwolan.size());
+        
         // Zapełnienie listy segmentów
         DefaultListModel mdl = new DefaultListModel();
         for(int i = 0 ; i<ProcMan.memory.segments.length ; i++)
@@ -264,8 +275,9 @@ public class SimulationGUI extends javax.swing.JFrame
         {
             model.addElement("Brak procesów");
         }
-        lstPages.setModel(model);
-        lstPages.setSelectedIndex(selected);  
+        lstProcesy.setModel(model);
+        if(!lstProcesy.isSelectedIndex(selected))
+        lstProcesy.setSelectedIndex(selected);  
         
          // Zapełnienie listy wywołań
         DefaultListModel tmplmodel = new DefaultListModel();
@@ -303,13 +315,13 @@ public class SimulationGUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JLabel lblAverageWaited;
-    private javax.swing.JLabel lblNumberRealised;
-    private javax.swing.JLabel lblProcessDuration;
-    private javax.swing.JLabel lblROTQuant;
+    private javax.swing.JLabel lblErrPerPage;
+    private javax.swing.JLabel lblErrors;
+    private javax.swing.JLabel lblIloscPrzebiegow;
+    private javax.swing.JLabel lblPages;
+    private javax.swing.JLabel lblRamki;
+    private javax.swing.JLabel lblRealised;
     private javax.swing.JLabel lblRemaining;
-    private javax.swing.JLabel lblRemainingTime;
-    private javax.swing.JLabel lblWorkTime;
     private javax.swing.JList lstPages;
     private javax.swing.JList lstProcesy;
     private javax.swing.JList lstSegmenty;
