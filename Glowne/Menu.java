@@ -1,3 +1,5 @@
+package Glowne;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,6 +10,13 @@
  *
  * @author Szab
  */
+import Algorytmy1.FIFOsimulation;
+import Algorytmy1.OPTsimulation;
+import Algorytmy1.Simulation;
+import Algorytmy1.LRUsimulation;
+import Algorytmy1.AprLRUsimulation;
+import Algorytmy1.RANDsimulation;
+import Algorytmy2.*;
 import java.util.*;
 
 public class Menu extends javax.swing.JFrame
@@ -197,13 +206,19 @@ public class Menu extends javax.swing.JFrame
         
         MemoryManager ProcMan = new MemoryManager(Integer.parseInt(jtxtMaxProc.getText()), Integer.parseInt(jtxtMaxPage.getText()));
         Simulation sim = null;
+        Simulation sim2 = null;
+        
         if(btnFCFS.isSelected()) sim = new FIFOsimulation(ProcMan);
         if(btnSJF.isSelected()) sim = new OPTsimulation(ProcMan);
         if(btnSJFw.isSelected()) sim = new LRUsimulation(ProcMan);
         if(btnROT.isSelected()) sim = new AprLRUsimulation(ProcMan);
         if(btnRAND.isSelected()) sim = new RANDsimulation(ProcMan);
         
-        if(sim!=null) ProcMan.initialize(sim);
+        if(btnRowny.isSelected()) sim2 = new Stalysimulation(ProcMan);
+        if(btnStrefowy.isSelected()) sim2 = new Strefowysimulation(ProcMan);
+        if(btnProp.isSelected()) sim2 = new Proporcjonalnysimulation(ProcMan);
+        
+        if(sim!=null) ProcMan.initialize(sim, sim2);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnRownyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRownyActionPerformed

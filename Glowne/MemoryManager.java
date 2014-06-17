@@ -1,3 +1,5 @@
+package Glowne;
+
 /* Klasa ProcessManager:
 - Obsługa generatora procesów
 - Zliczanie wykonań
@@ -5,24 +7,30 @@
 - Wybór algorytmu
 */
 
+import Algorytmy1.Simulation;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 public class MemoryManager
 {
     public int workTime = 0; // Liczba zrealizowanych kwantów czasu
     
-    public ArrayList<Process> processList;  // Lista procesów do zrealizowania
-    public ArrayList<Page> ciagOdwolan;     // Globalny ciąg odwołań
-    public ArrayList<Page> callHistory;     // Historia wywolan
+    public ArrayList<Process> processList = new ArrayList<Process>();  // Lista procesów do zrealizowania
+    public ArrayList<Page> ciagOdwolan = new ArrayList<Page>();    // Globalny ciąg odwołań
+    public ArrayList<Page> callHistory = new ArrayList<Page>();     // Historia wywolan
     
     public Memory memory;   // Pamięć
     
     private IOController controller; // Kontroler wejścia/wyjścia
+    public Simulation alg;
+    public Simulation additionalSim;
+    
     
     // Stworz ciag odwolan
     public void createCallList()
     {
+        ciagOdwolan = new ArrayList<Page>();
         for(Process proc : processList)
         {
             for(int i = 0 ; i<proc.callList.length ; i++)
@@ -43,18 +51,21 @@ public class MemoryManager
     // Zwraca sumę błędów
     public int sumErrors()
     {
-        int errors = 0;
-        for(int i = 0 ; i<memory.pages.length ; i++)
-            errors += memory.pages[i].errors;
-        return errors;
+        int err = 0;
+        for(Process proc : processList)
+            err += proc.getErrors();
+        return err;
     }
     
     // Zwraca sumę odwołań
     public int sumCalls()
     {
         int calls = 0;
-        for(int i = 0 ; i<memory.pages.length ; i++)
-            calls += memory.pages[i].calls;
+        for(Process proc : processList)
+        {
+            for(int i = 0 ; i<proc.callList.length ; i++)
+                calls += proc.callList[i].calls;
+        }
         return calls;
     }
     
@@ -64,10 +75,6 @@ public class MemoryManager
         return (double)sumErrors()/(double)sumCalls();
     }
     
-    public void call()
-    {
-        
-    }
     
     // Generuje losowe ciągi odwołań
     private void processGenerator(int maxProc, int maxPage)
@@ -80,25 +87,29 @@ public class MemoryManager
         {
            String randomID = UUID.randomUUID().toString(); // Generowanie losowego ID
            Process newProcess = new Process(randomID, workTime, rand.nextInt(maxPage-1)+1); // Tworzenie nowego procesu z losową ilością odwołań
-           int uniquePages = rand.nextInt(newProcess.callList.length-1)+1;  // Tworzenie nowego zbioru stron
+           processList.add(newProcess);
+           
+           int uniquePages = newProcess.callList.length;  // Tworzenie nowego zbioru stron
            for(int j = 0 ; j<uniquePages ; j++)
            {
                Page newPage = new Page(newProcess, memory);
                newProcess.callList[j] = newPage;
-               memory.pages[memory.findFreePage()] = newPage;
+               ciagOdwolan.add(newPage);
            }
            
-           for(int k = uniquePages ; k<newProcess.callList.length ; k++)
+           int r = rand.nextInt(Math.abs(maxProc-uniquePages)+1);
+           for(int k = 0 ; k<r ; k++)
            {
-               newProcess.callList[k] = newProcess.callList[rand.nextInt(k)];
+               ciagOdwolan.add(newProcess.callList[rand.nextInt(uniquePages)]);
            }
            
-           createCallList();
         }
+        Collections.shuffle(ciagOdwolan);
     }
         
     public void nextStep() //kolejny krok (jednostka czasu)
     {        
+        if(additionalSim != null) additionalSim.serve(null);
         if(!ciagOdwolan.isEmpty()) ciagOdwolan.get(0).call();
         callHistory.add(ciagOdwolan.remove(0));
         workTime++;
@@ -115,17 +126,18 @@ public class MemoryManager
     }
     
     // Inicjalizuje PM
-    public void initialize(Simulation sim)
+    public void initialize(Simulation sim, Simulation sim2)
     {
-        memory = new Memory(sim);
+        alg = sim;
+        additionalSim = sim2;
+        controller = new IOController(this);
         controller.initialize();
     }
     
     public MemoryManager(int maxProc, int maxPage)
-    {
-        this.processList = new ArrayList<Process>();
+    {        
+        memory = new Memory(this);
         processGenerator(maxProc, maxPage);
-        controller = new IOController(this);
     }
     
 }

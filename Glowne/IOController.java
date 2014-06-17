@@ -1,3 +1,5 @@
+package Glowne;
+
 /* Klasa IOController:
 - Wyświetlanie statystyk i obecnego stanu symulacji
 - Interakcja z użykownikiem
@@ -65,6 +67,6 @@ public class IOController
     // Aktualizuje ilość wygenerowanych procesów
     public void updateGeneratedCount()
     {
-        GUI.incrementGenerated();
+        //GUI.incrementGenerated();
     }
 }

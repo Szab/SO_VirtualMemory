@@ -1,3 +1,5 @@
+package Glowne;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,9 +29,9 @@ public class SimulationGUI extends javax.swing.JFrame
         this.IO = IO;
         initComponents();
         
-        Integer count = ProcMan._templateList.size();
-        lblGeneratorCount.setText(count.toString());  
-        lblROTQuant.setText((new Integer(ProcMan.quantSize)).toString());
+       // Integer count = ProcMan._templateList.size();
+       // lblGeneratorCount.setText(count.toString());  
+       // lblROTQuant.setText((new Integer(ProcMan.quantSize)).toString());
         
     }
     
@@ -68,120 +70,63 @@ public class SimulationGUI extends javax.swing.JFrame
         btnNextQ = new javax.swing.JButton();
         btnFastFW = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        lstOdwolania = new javax.swing.JList();
+        lstPages = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
-        lstStrony = new javax.swing.JList();
+        lstWywolania = new javax.swing.JList();
         jScrollPane5 = new javax.swing.JScrollPane();
-        lstProcesy1 = new javax.swing.JList();
+        lstProcesy = new javax.swing.JList();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstSegmenty = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Statystyki symulacji"));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Pozostało odwołań:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 46, -1, -1));
 
         jLabel3.setText("Zrealizowano odwołań:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 66, -1, -1));
 
         jLabel4.setText("Ilość błędów:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 86, -1, -1));
 
         jLabel6.setText("Błędów na odwołanie:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 138, -1, -1));
 
         jLabel7.setText("Ilość stron:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 158, -1, -1));
 
         jLabel8.setText("Ilość przebiegów:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 27, -1, -1));
 
         jLabel11.setText("Ilość ramek:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 178, -1, -1));
 
         lblWorkTime.setText("0");
+        jPanel1.add(lblWorkTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 27, -1, -1));
 
         lblRemaining.setText("0");
+        jPanel1.add(lblRemaining, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 46, -1, -1));
 
         lblNumberRealised.setText("0");
+        jPanel1.add(lblNumberRealised, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 66, -1, -1));
 
         lblAverageWaited.setText("0");
+        jPanel1.add(lblAverageWaited, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 86, -1, -1));
 
         lblProcessDuration.setText("0,0");
+        jPanel1.add(lblProcessDuration, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 138, -1, -1));
 
         lblRemainingTime.setText("0");
+        jPanel1.add(lblRemainingTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 158, -1, -1));
 
         lblROTQuant.setText("0");
+        jPanel1.add(lblROTQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 178, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(116, 116, 116)
-                        .addComponent(lblWorkTime))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(105, 105, 105)
-                        .addComponent(lblRemaining))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(89, 89, 89)
-                        .addComponent(lblNumberRealised))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(136, 136, 136)
-                        .addComponent(lblAverageWaited))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(94, 94, 94)
-                        .addComponent(lblProcessDuration))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel7))
-                        .addGap(142, 142, 142)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblROTQuant)
-                            .addComponent(lblRemainingTime))))
-                .addGap(243, 243, 243))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(lblWorkTime))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(lblRemaining))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(lblNumberRealised))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(lblAverageWaited))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblProcessDuration)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRemainingTime)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(lblROTQuant))
-                .addGap(34, 34, 34))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 360, 220));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Kontrola przebiegu"));
 
@@ -226,17 +171,28 @@ public class SimulationGUI extends javax.swing.JFrame
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 180, -1));
 
-        jScrollPane3.setViewportView(lstOdwolania);
+        jScrollPane3.setViewportView(lstPages);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 490, 170));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 490, 130));
 
-        jScrollPane4.setViewportView(lstStrony);
+        jScrollPane4.setViewportView(lstWywolania);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 476, 350));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 480, 240));
 
-        jScrollPane5.setViewportView(lstProcesy1);
+        lstProcesy.addListSelectionListener(new javax.swing.event.ListSelectionListener()
+        {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt)
+            {
+                lstProcesyValueChanged(evt);
+            }
+        });
+        jScrollPane5.setViewportView(lstProcesy);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 490, 180));
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 490, 110));
+
+        jScrollPane1.setViewportView(lstSegmenty);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 970, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -251,7 +207,20 @@ public class SimulationGUI extends javax.swing.JFrame
         ProcMan.endSimulation();
     }//GEN-LAST:event_btnFastFWActionPerformed
 
+    private void lstProcesyValueChanged(javax.swing.event.ListSelectionEvent evt)//GEN-FIRST:event_lstProcesyValueChanged
+    {//GEN-HEADEREND:event_lstProcesyValueChanged
+        Process proc = ProcMan.processList.get(lstProcesy.getSelectedIndex());
+        DefaultListModel tmplmodel = new DefaultListModel();
+        for(int i = 0 ; i<proc.callList.length ; i++)
+        {
+            Page page = proc.callList[i];
+                tmplmodel.addElement("Właściciel strony: "+page.owner.id+", czy w pamięci: "+page.presenceBit+", adres segmentu: "+page.segmentNumber);
+        }
+        lstPages.setModel(tmplmodel);
+    }//GEN-LAST:event_lstProcesyValueChanged
+
     // Ustawia wartosc wygenerowanych procesów
+    /*
     public void incrementGenerated()
     {
         Integer count = Integer.parseInt(lblCountGenerated.getText());
@@ -259,69 +228,59 @@ public class SimulationGUI extends javax.swing.JFrame
         
         lblCountGenerated.setText(count.toString());
     }
+    */
     
     // Aktualizuje wartości statystyk
     public void update()
     {
-        Integer workTime = ProcMan.workTime;
-        Integer remainingProc = ProcMan.processList.size();
-        Integer procRealised = ProcMan.numberRealised;
-        Double average = ProcMan.getAverageTime();     
-        
-        // Aktualizacja statystyk
-        if(ProcMan.processList.size()!=0)
+        // Zapełnienie listy segmentów
+        DefaultListModel mdl = new DefaultListModel();
+        for(int i = 0 ; i<ProcMan.memory.segments.length ; i++)
         {
-             Integer currentDuration = ProcMan.getCurrent().duration;
-             Integer currentRemaining = ProcMan.getCurrent().timeLeft;
-             String currentProcess = ProcMan.getCurrent().id;
-             lblCurrentProcess.setText(currentProcess);
-             lblProcessDuration.setText(currentDuration.toString());
-             lblRemainingTime.setText(currentRemaining.toString());
+            Page[] segments = ProcMan.memory.segments;
+            if(segments[i] == null)
+            {
+                mdl.addElement(i+". Wpis pusty");
+            }
+            else
+            {
+                mdl.addElement(i+". Właściciel strony: "+segments[i].owner.id);
+            }
         }
-        else
-        {
-            lblCurrentProcess.setText("brak");
-            lblProcessDuration.setText("-");
-            lblRemainingTime.setText("-");
-        }
-        lblAverageWaited.setText(average.toString());
-        lblRemaining.setText(remainingProc.toString());
-        lblWorkTime.setText(workTime.toString());
-        lblNumberRealised.setText(procRealised.toString());
+       lstSegmenty.setModel(mdl);
         
         // Zapełnienie listy procesów
         DefaultListModel model = new DefaultListModel();
         int selected = 0;
         
-        if(ProcMan.processList.size()!=0)
+        if(!ProcMan.processList.isEmpty())
         {
             for(Process process : ProcMan.processList)
             {
-                model.addElement(process.id+": długość "+process.duration+", pozostało "+process.timeLeft);
-                if(process == ProcMan.getCurrent()) selected = model.size()-1;
+                model.addElement(process.id);
             }
         }
         else
         {
             model.addElement("Brak procesów");
         }
-        lstOdwolania.setModel(model);
-        lstOdwolania.setSelectedIndex(selected);  
+        lstPages.setModel(model);
+        lstPages.setSelectedIndex(selected);  
         
-         // Zapełnienie listy wzorców
+         // Zapełnienie listy wywołań
         DefaultListModel tmplmodel = new DefaultListModel();
-        if(ProcMan._templateList.size()!=0)
+        if(ProcMan.ciagOdwolan.size()!=0)
         {
-            for(ProcessTemplate template : ProcMan._templateList)
+            for(Page page : ProcMan.ciagOdwolan)
             {
-                tmplmodel.addElement("Wzór id: "+template.id+", długość procesu "+template.duration+". Generowany co "+template.interval+" jednostek czasu. Pozostało: "+template.remaining);
+                tmplmodel.addElement("Właściciel strony: "+page.owner.id+", czy w pamięci: "+page.presenceBit+", adres segmentu: "+page.segmentNumber);
             }
         }
         else
         {
-            tmplmodel.addElement("Brak wzorców");
+            tmplmodel.addElement("Brak stron do wywolania");
         }
-        lstStrony.setModel(tmplmodel);
+        lstWywolania.setModel(tmplmodel);
     }
     /**
      * @param args the command line arguments
@@ -340,6 +299,7 @@ public class SimulationGUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -350,8 +310,9 @@ public class SimulationGUI extends javax.swing.JFrame
     private javax.swing.JLabel lblRemaining;
     private javax.swing.JLabel lblRemainingTime;
     private javax.swing.JLabel lblWorkTime;
-    private javax.swing.JList lstOdwolania;
-    private javax.swing.JList lstProcesy1;
-    private javax.swing.JList lstStrony;
+    private javax.swing.JList lstPages;
+    private javax.swing.JList lstProcesy;
+    private javax.swing.JList lstSegmenty;
+    private javax.swing.JList lstWywolania;
     // End of variables declaration//GEN-END:variables
 }
