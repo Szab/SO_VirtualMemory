@@ -34,8 +34,33 @@ public class Stalysimulation extends Simulation
     
     public void serve(Page page)
     {
-        mem = procMan.memory;
-        if(procMan.workTime != 0) return;
+       mem = procMan.memory;
+        boolean czyObsluzyc = false;
+        if(procMan.workTime == 0) czyObsluzyc = true;   // Na samym początku symulacji
+        
+        /*
+        // Sprawdź czy jakiś proces nie zakończył już działania
+        Process proc1 = null;
+        for(Process proc : procMan.processList)
+        {
+            boolean kontrolne = true;
+            for(int i = 0 ; i<proc.callList.length ; i++)
+            {
+                if(procMan.ciagOdwolan.contains(proc.callList[i])) kontrolne = false;
+            }
+            if(kontrolne)
+            {
+                proc1 = proc;
+            } 
+        }
+        if(proc1 != null) 
+        {
+            procMan.processList.remove(proc1);
+            czyObsluzyc = true;
+        }
+                */
+        
+        if(!czyObsluzyc) return;
         
         int najmniejsza = procMan.processList.get(0).callList.length;
         
@@ -54,17 +79,18 @@ public class Stalysimulation extends Simulation
                     mem.segments[n] = proc.callList[i];
                     mem.segments[n].presenceBit = true;
                     mem.segments[n].segmentNumber = n;
+                    mem.segments[n].added = System.nanoTime();
                 }
                 if(n>=0) proc.pula.add(n);
             }
         }
         
         // Przydziel pozostałe
-        while(mem.findFreeSegment() != -1)
+        for(int i = mem.findFreeSegment() ; i<mem.segments.length && i>=0 ; i++)
         {
             for(Process proc : procMan.processList)
             {
-                proc.pula.add(mem.findFreeSegment());
+                proc.pula.add(i);
             }
         }
         

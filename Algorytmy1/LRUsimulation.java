@@ -57,5 +57,8 @@ public class LRUsimulation extends Simulation
         mem.segments[i].segmentNumber = -1;
         mem.segments[i].added = System.nanoTime();
         mem.segments[i] = page;
+                mem.segments[i].added = System.nanoTime();
+        mem.segments[i].presenceBit = true;
+        mem.segments[i].segmentNumber = i;
     }
 }

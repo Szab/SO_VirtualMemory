@@ -34,14 +34,38 @@ public class Strefowysimulation extends Simulation
     
     public void serve(Page page)
     {
-                mem = procMan.memory;
-        if(procMan.workTime % 10 != 0 || procMan.workTime == 0) return;
+        mem = procMan.memory;
+        /*
+        // Sprawdź czy jakiś proces nie zakończył już działania
+        Process proc1 = null;
+        for(Process proc : procMan.processList)
+        {
+            boolean kontrolne = true;
+            for(int i = 0 ; i<proc.callList.length ; i++)
+            {
+                if(procMan.ciagOdwolan.contains(proc.callList[i])) kontrolne = false;
+            }
+            if(kontrolne)
+            {
+                proc1 = proc;
+            } 
+        }
+        if(proc1 != null) 
+        {
+            procMan.processList.remove(proc1);
+        }
+        */
+        if(procMan.workTime % (int)(10*((double)procMan.callHistory.size()+(double)procMan.ciagOdwolan.size())/(double)procMan.sumCalls()) != 0 || procMan.workTime == 0) return;
         for(int i = 0 ; i<mem.segments.length ; i++)
         {
             Page pg = mem.segments[i];
-            mem.segments[i] = null;
-            pg.presenceBit = false;
-            pg.segmentNumber = -1;           
+            if(mem.segments[i] != null)
+            {
+                mem.segments[i] = null;
+                pg.presenceBit = false;
+                pg.segmentNumber = -1;           
+            }
+            
         }
         
         for(Process proc : procMan.processList)
@@ -68,6 +92,7 @@ public class Strefowysimulation extends Simulation
                     mem.segments[j] = unique.get(i);
                     unique.get(i).presenceBit = true;
                     unique.get(i).segmentNumber = j;
+                    unique.get(i).added = System.nanoTime();
                     proc.pula.add(j);
                 }
             }

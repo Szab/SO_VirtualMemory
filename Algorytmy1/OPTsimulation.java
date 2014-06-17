@@ -25,17 +25,19 @@ public class OPTsimulation extends Simulation
                 return i;
         
         // Wywal stronę która pojawi się najpóźniej
-        Page page = procMan.ciagOdwolan.get(procMan.ciagOdwolan.size()-1);
-        for(int i = 0 ; i<mem.segments.length ; i++)
+        Page page = null;
+        for(int i = procMan.ciagOdwolan.size()-1 ; i>=0 && page == null ; i--)
         {
-            if(mem.segments[i] == page) return i;
+            if(procMan.ciagOdwolan.get(i).presenceBit) page=procMan.ciagOdwolan.get(i);
         }
-        return -1;
+        
+        return page.segmentNumber;
     }
     
     public int findLocal(Page page)
     {
         Process owner = page.owner;
+        
         // Wywal stronę która nie pojawi się już wcale
         for(Integer n : owner.pula)
         {
@@ -46,20 +48,16 @@ public class OPTsimulation extends Simulation
         
         // Znajdź najpóźniej występującą stronę i ją wywal
         Page pg = null;
-        for(int i = procMan.ciagOdwolan.size()-1 ; i>=0 ; i--)
+        for(Integer n : owner.pula)
         {
-            pg = procMan.ciagOdwolan.get(i);
-            if(pg.owner == owner && pg.presenceBit)
+            if(pg == null) pg = mem.segments[n];
+            else
             {
-                break;
+                if(procMan.ciagOdwolan.lastIndexOf(pg) < procMan.ciagOdwolan.lastIndexOf(mem.segments[n])) pg = mem.segments[n];
             }
         }
         
-        for(int i = 0 ; i<mem.segments.length ; i++)
-        {
-            if(mem.segments[i] == pg) return i;
-        }
-        return -1;
+        return pg.segmentNumber;
     }
     
     public OPTsimulation(MemoryManager procMan)
@@ -73,5 +71,8 @@ public class OPTsimulation extends Simulation
         mem.segments[i].presenceBit = false;
         mem.segments[i].segmentNumber = -1;
         mem.segments[i] = page;
+        mem.segments[i].added = System.nanoTime();
+        mem.segments[i].presenceBit = true;
+        mem.segments[i].segmentNumber = i;
     }
 }

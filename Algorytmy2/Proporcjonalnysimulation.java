@@ -34,9 +34,32 @@ public class Proporcjonalnysimulation extends Simulation
     
     public void serve(Page page)
     {
-                mem = procMan.memory;
-        if(procMan.workTime != 0) return;
+        mem = procMan.memory;
+        boolean czyObsluzyc = false;
+        if(procMan.workTime == 0) czyObsluzyc = true;   // Na samym początku symulacji
+        /*
+        // Sprawdź czy jakiś proces nie zakończył już działania
+        Process proc1 = null;
+        for(Process proc : procMan.processList)
+        {
+            boolean kontrolne = true;
+            for(int i = 0 ; i<proc.callList.length ; i++)
+            {
+                if(procMan.ciagOdwolan.contains(proc.callList[i])) kontrolne = false;
+            }
+            if(kontrolne)
+            {
+                proc1 = proc;
+            } 
+        }
+        if(proc1 != null) 
+        {
+            procMan.processList.remove(proc1);
+            czyObsluzyc = true;
+        }
         
+        if(!czyObsluzyc) return;
+        */
         // Zlicz wszystkie
         int wszystkie = 0;
         for(Process proc : procMan.processList)
@@ -60,17 +83,18 @@ public class Proporcjonalnysimulation extends Simulation
                     mem.segments[wolny] = proc.callList[i];
                     mem.segments[wolny].presenceBit = true;
                     mem.segments[wolny].segmentNumber = wolny;
+                    mem.segments[wolny].added = System.nanoTime();
                 }
             }
             
         }
         
         // Przydziel pozostałe
-        while(mem.findFreeSegment() != -1)
+        for(int i = mem.findFreeSegment() ; i<mem.segments.length && i>=0 ; i++)
         {
             for(Process proc : procMan.processList)
             {
-                proc.pula.add(mem.findFreeSegment());
+                proc.pula.add(i);
             }
         }
         
