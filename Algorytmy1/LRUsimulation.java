@@ -1,3 +1,9 @@
+package Algorytmy1;
+
+import Glowne.MemoryManager;
+import Glowne.Memory;
+import Glowne.Page;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,14 +14,13 @@
  *
  * @author Szab
  */
-public class OPTsimulation extends Simulation
+public class LRUsimulation extends Simulation
 {
     public Process current = null;	
-    public MemoryManager procMan;
     
     public Memory mem = procMan.memory;
     
-    public int findLongestIndex()
+    public int findOldestIndex()
     {
         int index = -1;
         for(int i = 0 ; i<mem.segments.length ; i++)
@@ -29,16 +34,17 @@ public class OPTsimulation extends Simulation
         return index;
     }
     
-    public OPTsimulation(MemoryManager procMan)
+    public LRUsimulation(MemoryManager processManager)
     {
-        super(procMan);
+        super(processManager);
     }
     
     public void serve(Page page)
     {
-        int i = findLongestIndex();
+        int i = findOldestIndex();
         mem.segments[i].presenceBit = false;
         mem.segments[i].segmentNumber = -1;
+        mem.segments[i].added = System.nanoTime();
         mem.segments[i] = page;
     }
 }

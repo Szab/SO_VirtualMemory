@@ -1,3 +1,10 @@
+package Algorytmy1;
+
+import Glowne.Page;
+import Glowne.MemoryManager;
+
+
+
 public abstract class Simulation 
 {
     public MemoryManager procMan;
